@@ -1,0 +1,64 @@
+// 1. An object-oriented model that uses classes and inheritance
+
+abstract class Animal {
+  String name;
+  int age;
+
+  Animal(this.name, this.age);
+
+  void makeSound() {
+    print('The animal makes a sound.');
+  }
+}
+
+class Dog extends Animal {
+  String breed;
+
+
+  Dog(String name, int age, this.breed) : super(name, age);
+
+  @override
+  void makeSound() {
+    print('The $breed dog barks.');
+  }
+}
+
+// 2. A class that implements an interface
+abstract class Feedable {
+  void feed(int amount);
+}
+
+class Cat extends Animal implements Feedable {
+  Cat(String name, int age) : super(name, age);
+
+  @override
+  void feed(int amount) {
+    print('The cat was fed $amount grams of food.');
+  }
+
+  @override
+  void makeSound() {
+    print('The cat meows.');
+  }
+}
+
+// 3. A class that overrides an inherited method
+// (The overriding of the makeSound() method is shown in the Dog and Cat classes above)
+
+// 4. An instance of a class that is initialized with data from a file
+void main() {
+  // Pretend we're reading data from a file
+  final dogData = ['Buddy', '5', 'Labrador'];
+  final catData = ['Whiskers', '3'];
+
+  final dog = Dog(dogData[0], int.parse(dogData[1]), dogData[2]);
+  final cat = Cat(catData[0], int.parse(catData[1]));
+
+  // 5. A method that demonstrates the use of a loop
+  List<Animal> animals = [dog, cat];
+  for (final animal in animals) {
+    animal.makeSound();
+  }
+
+  (cat as Feedable).feed(100);
+}
